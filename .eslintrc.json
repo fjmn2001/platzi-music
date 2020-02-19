@@ -2,7 +2,7 @@
   "extends": "standard",
   "rules": {
     "no-new": 0,
-    "indent": 2
+    "indent": ["error", 4]
   },
   "plugins": ["html"]
 }
