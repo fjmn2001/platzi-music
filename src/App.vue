@@ -1,14 +1,45 @@
 <template lang="pug">
     #app
-        img(src="https://static.platzi.com/media/user_upload/Page%201-d8d869f4-7130-4ae9-9907-2fa809bd136a.jpg")
+        section.section
+            nav.nav.shadow
+                .container
+                    input.form-control(type="text", placeholder="Buscar canciones", v-model="searchQuery")
+                    a.btn.btn-info(@click.prevent="search") Buscar
+                    a.btn.btn-danger &times;
+
+            .container
+                p
+                    small {{searchMessage}}
+
+            .container.results
+                .row
+                    .col-md-3(v-for="t in tracks") {{t.name}} {{t.artist}}
 </template>
 
 <script>
+    import trackService from './services/track'
+
     export default {
         name: 'app',
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                searchQuery: '',
+                tracks: []
+            }
+        },
+        computed: {
+            searchMessage () {
+                return `Encontrados: ${this.tracks.length}`
+            }
+        },
+        methods: {
+            search () {
+                if (!this.searchQuery) {
+                    return
+                }
+                trackService.search(this.searchQuery).then((response) => {
+                    this.tracks = response.tracks.items
+                })
             }
         }
     }
@@ -17,8 +48,7 @@
 <style lang="scss">
     @import "./scss/main";
 
-    #app {
-        font-family: 'Roboto', serif;
-        font-weight: bold;
+    .results {
+        margin-top: 50px;
     }
 </style>
