@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <img alt="logo" src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-  </div>
+    <div id="app">
+        <img alt="logo" src="./assets/logo.png">
+        <h1>{{ msg }}</h1>
+    </div>
 </template>
 
 <script>
@@ -17,5 +17,5 @@
 </script>
 
 <style lang="scss">
-
+    @import "./scss/main";
 </style>
